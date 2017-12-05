@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="br.pucrio.inf.organic.AgglomerationDetector" name="%extension-point.name" schema="schema/br.pucrio.inf.organic.AgglomerationDetector.exsd"/>
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+      		adaptable="true"
+            id="br.pucrio.inf.organic.contribution1"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="br.pucrio.inf.organic.extensions.ui.FindAgglomerationsPopUpAction"
+               enablesFor="+"
+               id="br.pucrio.inf.organic.FindAgglomerations"
+               label="Find Agglomerations"
+               icon="icons/organic.png"
+               menubarPath="br.pucrio.inf.organic.menu1/group1">
+         </action>
+         <menu
+               id="br.pucrio.inf.organic.menu1"
+               label="Organic"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="br.pucrio.inf.organic.contribution2"
+            nameFilter="*"
+            objectClass="org.eclipse.core.resources.IProject">
+         <menu
+               id="br.pucrio.inf.organic.menu1"
+               label="Organic"
+               path="additions">
+            <separator
+                  name="group1">
+            </separator>
+         </menu>
+         <action
+               class="br.pucrio.inf.organic.extensions.ui.FindAnomaliesPopUpAction"
+               enablesFor="+"
+               icon="icons/organic.png"
+               id="br.pucrio.inf.organic.FindAnomalies"
+               label="Find Anomalies"
+               menubarPath="br.pucrio.inf.organic.menu1/group1">
+         </action>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            category="br.pucrio.inf.organic"
+            class="br.pucrio.inf.organic.extensions.ui.agglomeration.AgglomerationsView"
+            icon="icons/organic.png"
+            id="br.pucrio.inf.organic.extensions.ui.agglomeration.AgglomerationsView"
+            name="Agglomerations View">
+      </view>
+      <view
+            category="br.pucrio.inf.organic"
+            class="br.pucrio.inf.organic.extensions.ui.AnomaliesView"
+            icon="icons/organic.png"
+            id="br.pucrio.inf.organic.extensions.ui.AnomaliesView"
+            name="Anomalies View">
+      </view>      
+      <category
+            id="br.pucrio.inf.organic"
+            name="Organic">
+      </category>      
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <view
+               id="br.pucrio.inf.organic.extensions.ui.agglomerations.AgglomerationsView"
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.ProblemView">
+         </view>
+         <view
+               id="br.pucrio.inf.organic.extensions.ui.AnomaliesView"
+               ratio="0.5"
+               relationship="right"
+               relative="org.eclipse.ui.views.ProblemView">
+         </view>
+      </perspectiveExtension>
+   </extension>
+   <extension
+   		 id="br.pucrio.inf.organic.agglomerationMarker"
+   		 name="Agglomeration"
+         point="org.eclipse.core.resources.markers">
+         <super
+         type="org.eclipse.core.resources.problemmarker">
+   	 </super>
+   	 <persistent
+         	value="true">
+   </persistent>
+   </extension>
+
+	<extension point="org.eclipse.ui.preferencePages">
+		<page name="Organic"
+			class="br.pucrio.inf.organic.extensions.ui.OrganicPreferencePage"
+			id="br.pucrio.inf.organic.extensions.ui.preference.page"/>
+	</extension>
+ <extension
+       point="org.eclipse.help.contexts">
+    <contexts
+          file="contexts.xml">
+    </contexts>
+ </extension>
+</plugin>
